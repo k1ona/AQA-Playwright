@@ -27,3 +27,14 @@
 - Full suite, headed: `pytest --headed`
 - Specific marker: `pytest -m smoke --headed`
 - UI component tests only: `pytest tests/test_ui_components.py --headed`
+
+## Known gotchas
+
+- BASE_URL must be `https://practice.expandtesting.com`, not
+  `https://expandtesting.com`. The apex domain returns a marketing page with
+  none of the practice site's selectors, so any locator wait against it times
+  out with no useful error pointing at the real cause. This has caused a real
+  failure twice: once locally, once in CI before secrets were wired in
+  correctly. config_manager.py's get_base_url() fallback now defaults to the
+  correct subdomain, but a misconfigured .env or missing CI secret will still
+  reproduce this exact failure.

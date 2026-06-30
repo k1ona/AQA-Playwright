@@ -42,3 +42,36 @@ not re-logging-in per test, unless the test is specifically about login.
 ## Naming
 
 test_<page>_<action>_<expected_outcome>, e.g. test_register_missing_email_shows_error
+
+
+## Navigation and wait strategy (learned the hard way)
+
+This project's BasePage.visit() uses wait_until="domcontentloaded", not the
+Playwright default of "load". The sandbox site serves ad and tracker
+resources that "load" waits on, which causes cascading timeouts across a
+multi-test run. Do not change this back to "load" without a real reason and
+a re-test of the full suite, not just the one test in front of you.
+
+The tradeoff that comes with domcontentloaded: the DOM is parsed, but the
+paint cycle may not be finished. That means visibility-based waits behave
+differently depending on what you're doing:
+
+- For assertions checking element state (is a checkbox checked, what's in a
+  dropdown, what's in an input), use locator.count() > 0, locator.is_checked(),
+  or locator.input_value(). These read live DOM properties without requiring
+  a visual paint, and won't flake on timing the way a visibility check will.
+- For interactions (click, fill), wait_for(state="visible") is fine, and
+  BasePage.click_element() / type_text() already use it with a 10000ms
+  timeout, not the original 5000ms, which proved too tight on ad-heavy pages.
+- Never write a bare locator.wait_for(state="visible") immediately before an
+  assertion on this sandbox site specifically. That pattern was the single
+  largest source of intermittent CI failures before the fix above, across
+  four separate incidents (checkboxes, dropdowns, inputs, and a generic h2
+  heading check).
+
+Also never call sync_playwright() directly inside a session-scoped pytest
+fixture. pytest-playwright already owns the event loop; starting a second
+sync context inside it raises an incompatibility error at fixture setup.
+Reuse the playwright and browser_type_launch_args fixtures pytest-playwright
+already provides. Reserve sync_playwright() for standalone scripts that run
+outside of pytest, like the one-off snapshot scripts in this project's history.
