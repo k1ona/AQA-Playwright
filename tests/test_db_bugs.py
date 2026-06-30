@@ -12,6 +12,17 @@
 import os
 import requests
 import psycopg2
+import pytest
+
+# This test depends on a local FastAPI app and Postgres container that only
+# exist on a developer machine, not in CI. Skipping here rather than trying
+# to stand up Postgres and the practice app inside the runner, since that
+# infrastructure exists specifically as a local-only fixture, a decision
+# made deliberately rather than by oversight.
+pytestmark = pytest.mark.skipif(
+    "GITHUB_ACTIONS" in __import__("os").environ,
+    reason="requires local practice app and Postgres container, not available in CI",
+)
 
 PRACTICE_APP_URL = "http://localhost:8000"
 DB_URL = os.getenv("TEST_DATABASE_URL")
