@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 # ============================================================
-# 🔍 STEP 1 — LOCATE THE ROOT .env FILE
+# STEP 1 — LOCATE THE ROOT .env FILE
 # ------------------------------------------------------------
 # We walk up from this file's directory to find the project
 # root. This keeps the loader working regardless of how deep
@@ -12,7 +12,7 @@ _ROOT_DIR = Path(__file__).resolve().parent.parent
 _ENV_FILE = _ROOT_DIR / ".env"
 
 # ============================================================
-# ⚡ STEP 2 — LOAD .env INTO THE PROCESS ENVIRONMENT
+# STEP 2 — LOAD .env INTO THE PROCESS ENVIRONMENT
 # ------------------------------------------------------------
 # python-dotenv reads KEY=VALUE pairs from the .env file and
 # injects them into os.environ so every part of the framework
@@ -32,7 +32,7 @@ except ImportError:
 
 
 # ============================================================
-# 🖱️ STEP 3 — EXPOSE CLEAN GETTER FUNCTIONS
+# STEP 3 — EXPOSE CLEAN GETTER FUNCTIONS
 # ------------------------------------------------------------
 # Tests and page objects should call these functions rather
 # than touching os.getenv() directly.  Each getter has a safe
@@ -40,7 +40,7 @@ except ImportError:
 # ============================================================
 def get_base_url() -> str:
     """Return the application root URL defined in .env (BASE_URL)."""
-    return os.getenv("BASE_URL", "https://expandtesting.com")
+    return os.getenv("BASE_URL", "https://practice.expandtesting.com")
 
 
 def get_login_path() -> str:
