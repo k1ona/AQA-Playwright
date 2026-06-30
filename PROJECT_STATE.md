@@ -26,6 +26,13 @@
 | `tests/api/test_cars.py` | `smoke`, `regression` | Cars listing endpoint, item shape validation |
 | `tests/api/test_currency.py` | `smoke`, `regression` | Currency conversion, valid pairs, unsupported pairs, missing params |
 
+## Test suite summary (as of last CI run)
+
+- Total collected: 52 (local, includes DB test)
+- CI result: 49 passed, 1 skipped, 2 xfailed
+- Skipped: `test_db_bugs.py` — requires local practice app and Postgres, not available in CI
+- Xfailed: 2 tests in `test_geo.py` — known upstream `/get-city` endpoint degradation
+
 ## Reference vault
 
 - `reference_vault/expandtesting/` — saved HTML snapshots of practice.expandtesting.com pages, for offline selector inspection without hitting the live site.
