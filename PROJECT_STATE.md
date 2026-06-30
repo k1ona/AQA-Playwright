@@ -19,7 +19,6 @@
 ## Reference vault
 
 - `reference_vault/expandtesting/` — saved HTML snapshots of practice.expandtesting.com pages, for offline selector inspection without hitting the live site.
-- `reference_vault/naveen_intel/` — additional reference materials.
 
 ## Useful commands
 
