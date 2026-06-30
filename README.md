@@ -23,6 +23,9 @@
   assertion or a silently broken CI badge
 - A documented project constitution (CLAUDE.md) and three scoped skill files
   (UI, API, database testing) that govern how tests get written in this repo
+- Allure test reporting with environment metadata, generated on every CI run
+  and available as a downloadable artifact from the GitHub Actions summary;
+  history persists between runs to enable trend tracking
 
 ## Architecture
 AQA-Playwright/
