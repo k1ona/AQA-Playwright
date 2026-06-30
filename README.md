@@ -1,0 +1,75 @@
+﻿# AQA-Playwright
+
+![tests](https://github.com/k1ona/AQA-Playwright/actions/workflows/tests.yml/badge.svg)
+
+## What this demonstrates
+
+- Page Object Model with role-based and ID-based locators, no raw selectors
+  inside test files
+- An AI-assisted workflow with deterministic guardrails: pre-commit secret
+  scanning (gitleaks), a Planner agent that verifies locators and server
+  responses against the live site before any code is written, and a
+  Builder-Auditor agent that audits and re-runs its own output before
+  reporting a task done
+- CI running the full suite on every push, with secrets injected via GitHub
+  repository secrets rather than committed anywhere
+- A documented project constitution (CLAUDE.md) and three scoped skill files
+  (UI, API, database testing) that govern how tests get written in this repo
+
+## Architecture
+AQA-Playwright/
+
+├── pages/                  # Page Object Models
+
+├── tests/                  # Test files, organized by feature
+
+├── utils/                  # config_manager, auth_helper
+
+├── reference_vault/        # Saved HTML snapshots for offline inspection
+
+├── .claude/
+
+│   ├── skills/              # aqa-ui-testing, aqa-api-testing, aqa-db-testing
+
+│   └── agents/               # planner, builder-auditor
+
+├── .github/workflows/      # CI pipeline
+
+├── CLAUDE.md                # Project constitution
+
+├── COMMENT_VOICE.md         # Code comment style rule
+
+├── PROJECT_STATE.md         # Current page objects, test coverage, known gotchas
+
+├── .pre-commit-config.yaml  # gitleaks + ruff, runs before every commit
+
+└── pytest.ini
+## Running locally
+
+```powershell
+git clone https://github.com/k1ona/AQA-Playwright.git
+cd AQA-Playwright
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+playwright install
+pre-commit install
+```
+
+Copy `.env.example` to `.env` and fill in real values for `BASE_URL`,
+`TEST_USERNAME`, and `TEST_PASSWORD`. Then:
+
+```powershell
+pytest
+```
+
+## What's intentionally out of scope right now
+
+- Mobile and native app testing
+- Accessibility scanning
+- Database integrity testing (the aqa-db-testing skill exists, but has no
+  database to test against yet, since the current target is a third-party
+  sandbox site with no accessible backend)
+- Multi-agent orchestration beyond Planner and Builder-Auditor
+
+These are deferred deliberately, not missing by oversight.
