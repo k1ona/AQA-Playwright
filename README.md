@@ -13,6 +13,10 @@
   reporting a task done
 - CI running the full suite on every push, with secrets injected via GitHub
   repository secrets rather than committed anywhere
+- Database integrity testing against a real PostgreSQL instance (a small
+  practice app, kept local rather than committed, since the public sandbox
+  site used for UI/API tests has no accessible database), with test
+  isolation via explicit cleanup so repeated runs do not leave stale rows
 - A documented project constitution (CLAUDE.md) and three scoped skill files
   (UI, API, database testing) that govern how tests get written in this repo
 
@@ -67,9 +71,9 @@ pytest
 
 - Mobile and native app testing
 - Accessibility scanning
-- Database integrity testing (the aqa-db-testing skill exists, but has no
-  database to test against yet, since the current target is a third-party
-  sandbox site with no accessible backend)
+- Broader database test coverage (constraint behavior, cascading deletes,
+  soft-delete timestamps) — one test currently proves the pattern works,
+  it is not yet a comprehensive suite
 - Multi-agent orchestration beyond Planner and Builder-Auditor
 
 These are deferred deliberately, not missing by oversight.
