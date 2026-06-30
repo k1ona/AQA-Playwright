@@ -1,5 +1,6 @@
 import os
 import pytest
+import pathlib
 
 from utils.auth_helper import SESSION_FILE_PATH, capture_session_automatically
 from utils.config_manager import (
@@ -32,6 +33,23 @@ _SESSION_PATH = SESSION_FILE_PATH
 # pytest-playwright's internal asyncio event loop — always
 # delegate browser creation to these fixtures instead.
 # ============================================================
+@pytest.fixture(scope="session", autouse=True)
+def allure_environment(tmp_path_factory):
+    # Writing environment metadata for Allure reports. Only non-sensitive
+    # values go here — BASE_URL is safe since it's the public sandbox,
+    # but credentials never appear in this file.
+    allure_dir = pathlib.Path("reports/allure-results")
+    allure_dir.mkdir(parents=True, exist_ok=True)
+    env_file = allure_dir / "environment.properties"
+    env_file.write_text(
+        f"Browser=Chromium\n"
+        f"Python={os.sys.version.split()[0]}\n"
+        f"Platform=Windows 11\n"
+        f"BASE_URL={os.getenv('BASE_URL', 'https://practice.expandtesting.com')}\n"
+        f"Suite=AQA-Playwright\n",
+        encoding="utf-8",
+    )
+
 @pytest.fixture(scope="session")
 def authenticated_page(playwright, browser_type_launch_args):
     """

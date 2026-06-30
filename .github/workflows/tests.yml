@@ -18,10 +18,43 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install --with-deps
+
+      - name: Download Allure history from previous run
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-history
+          path: reports/allure-results/history
+        continue-on-error: true
+
       - name: Run tests
-        run: pytest --maxfail=1 --disable-warnings -q
+        run: pytest --alluredir=reports/allure-results --maxfail=1 --disable-warnings -q
+
+      - name: Generate Allure report
+        if: always()
+        uses: simple-elf/allure-report-action@v1.13
+        with:
+          allure_results: reports/allure-results
+          allure_report: reports/allure-report
+          allure_history: reports/allure-results/history
+
+      - name: Upload Allure report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: reports/allure-report
+          retention-days: 30
+
+      - name: Upload Allure history for next run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-history
+          path: reports/allure-results/history
+          retention-days: 90
