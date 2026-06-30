@@ -53,6 +53,16 @@ def get_secure_path() -> str:
     return f"{get_base_url()}/secure"
 
 
+def get_register_path() -> str:
+    """Return the full URL of the register page."""
+    return f"{get_base_url()}/register"
+
+
+def get_register_password() -> str:
+    """Return the throwaway password used for sandbox registration tests."""
+    return os.getenv("TEST_REGISTER_PASSWORD", "TestPass123!")
+
+
 def get_test_username() -> str:
     """Return the sandbox test username defined in .env (TEST_USERNAME)."""
     return os.getenv("TEST_USERNAME", "practice")
