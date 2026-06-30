@@ -17,6 +17,10 @@
   practice app, kept local rather than committed, since the public sandbox
   site used for UI/API tests has no accessible database), with test
   isolation via explicit cleanup so repeated runs do not leave stale rows
+- API testing against a third-party service (practice.expandtesting.com),
+  including status code and response shape assertions, negative cases, and
+  a documented xfail for a known upstream bug rather than a softened
+  assertion or a silently broken CI badge
 - A documented project constitution (CLAUDE.md) and three scoped skill files
   (UI, API, database testing) that govern how tests get written in this repo
 

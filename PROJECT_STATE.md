@@ -15,8 +15,16 @@
 | File | Markers used | Coverage |
 |---|---|---|
 | `tests/test_authentication.py` | `smoke`, `regression`, `auth` | Login, invalid login, session state bypass |
-| `tests/test_ui_components.py` (added 2026-06-30) | `smoke`, `regression` | Checkbox toggling, all three dropdowns, all four input fields plus clear action |
-| `tests/test_register.py` (added 2026-06-30) | `smoke`, `regression` | Registration happy path, all server-side validation errors, duplicate username |
+| `tests/test_ui_components.py` | `smoke`, `regression` | Checkbox toggling, all three dropdowns, all four input fields plus clear action |
+| `tests/test_register.py` | `smoke`, `regression` | Registration form validation, duplicate username, password rules, success redirect |
+| `tests/test_db_bugs.py` | none | Bug creation via local practice app, verified directly against Postgres; skipped in CI (requires local infrastructure) |
+| `tests/api/test_health_check.py` | `smoke` | API health check endpoint |
+| `tests/api/test_math.py` | `smoke`, `regression` | /add endpoint, integers, negatives, floats with approx, missing params |
+| `tests/api/test_phone.py` | `smoke`, `regression` | Phone code lookup by country |
+| `tests/api/test_geo.py` | `smoke`, `regression` | City and location lookup by coordinates; two cases marked xfail for a known upstream /get-city degradation |
+| `tests/api/test_utility.py` | `smoke` | Time, random color, random number, echo endpoints |
+| `tests/api/test_cars.py` | `smoke`, `regression` | Cars listing endpoint, item shape validation |
+| `tests/api/test_currency.py` | `smoke`, `regression` | Currency conversion, valid pairs, unsupported pairs, missing params |
 
 ## Reference vault
 
