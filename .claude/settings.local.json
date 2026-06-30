@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"C:\\\\Workspace\\\\AQA-Playwright\\\\.venv\\\\Scripts\\\\python.exe\" -m pip install python-dotenv)",
+      "PowerShell(& \"C:\\\\Workspace\\\\AQA-Playwright\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import sys; print\\(sys.executable, sys.version\\)\")",
+      "PowerShell(& \"C:\\\\Workspace\\\\AQA-Playwright\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import ensurepip; ensurepip.bootstrap\\(\\)\" ; & \"C:\\\\Workspace\\\\AQA-Playwright\\\\.venv\\\\Scripts\\\\python.exe\" -m pip install python-dotenv)"
+    ]
+  }
+}
