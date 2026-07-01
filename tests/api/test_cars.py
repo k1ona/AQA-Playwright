@@ -1,7 +1,6 @@
 ﻿import pytest
 
 
-@pytest.mark.xfail(reason="/api/cars returns an empty response body, upstream degradation confirmed locally and in CI")
 @pytest.mark.smoke
 def test_cars_returns_200_with_list_of_six_items(api_session, api_base_url):
     response = api_session.get(f"{api_base_url}/cars")
@@ -11,7 +10,6 @@ def test_cars_returns_200_with_list_of_six_items(api_session, api_base_url):
     assert len(body["cars"]) == 6
 
 
-@pytest.mark.xfail(reason="/api/cars returns an empty response body, upstream degradation confirmed locally and in CI")
 @pytest.mark.regression
 def test_cars_each_item_contains_required_fields(api_session, api_base_url):
     response = api_session.get(f"{api_base_url}/cars")
