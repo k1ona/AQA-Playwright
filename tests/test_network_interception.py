@@ -26,11 +26,16 @@ def logged_in_notes_page(page: Page):
     # storage_state fixture, since the notes app uses a separate
     # authentication system at /notes/app/login, not /login.
     # Locators verified by inspection: id=email, id=password.
-    page.goto("https://practice.expandtesting.com/notes/app/login")
+    # Using domcontentloaded consistently with BasePage.visit() strategy
+    # since the notes app also has third-party resources that slow full load.
+    page.goto(
+        "https://practice.expandtesting.com/notes/app/login",
+        wait_until="domcontentloaded",
+    )
     page.locator("#email").fill(NOTES_EMAIL)
     page.locator("#password").fill(NOTES_PASSWORD)
     page.get_by_role("button", name="Login").click()
-    page.wait_for_url("**/notes/app")
+    page.wait_for_url("**/notes/app", wait_until="domcontentloaded", timeout=60000)
     return page
 
 
