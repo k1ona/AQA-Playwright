@@ -53,3 +53,17 @@
   correctly. config_manager.py's get_base_url() fallback now defaults to the
   correct subdomain, but a misconfigured .env or missing CI secret will still
   reproduce this exact failure.
+
+## Deferred additions
+
+- Cross-browser testing: add `--browser firefox` and `--browser webkit` to
+  pytest.ini addopts when ready to triple the test run across browsers.
+  Both are supported by pytest-playwright with no other changes needed.
+  CI workflow already installs all browser dependencies via
+  `playwright install --with-deps`.
+
+- Network interception/mocking: add tests using `page.route()` to intercept
+  and mock API responses from the browser — useful for testing edge cases
+  that are hard to trigger against a real server (empty lists, error states).
+  See Rahul Shetty course files test_Network1.py and test_Network2.py for
+  the pattern.
