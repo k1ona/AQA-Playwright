@@ -53,6 +53,11 @@
   correctly. config_manager.py's get_base_url() fallback now defaults to the
   correct subdomain, but a misconfigured .env or missing CI secret will still
   reproduce this exact failure.
+- PowerShell 5.1 `Out-File -Encoding utf8` silently adds a UTF-8 BOM to
+  files, which breaks pytest.ini parsing and can cause Python import errors.
+  Create sensitive files (pytest.ini, .py files) via VS Code directly rather
+  than PowerShell here-strings, or use `[System.IO.File]::WriteAllText()`
+  which writes clean UTF-8 without BOM.
 
 ## Deferred additions
 
