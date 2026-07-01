@@ -25,6 +25,7 @@
 | `tests/api/test_utility.py` | `smoke` | Time, random color, random number, echo endpoints |
 | `tests/api/test_cars.py` | `smoke`, `regression` | Cars listing endpoint, item shape validation |
 | `tests/api/test_currency.py` | `smoke`, `regression` | Currency conversion, valid pairs, unsupported pairs, missing params |
+| `tests/test_network_interception.py` | `smoke` | Network interception via page.route() — mocks notes API empty response and asserts UI empty state renders correctly |
 
 ## Test suite summary (as of last CI run)
 
