@@ -54,7 +54,34 @@ Code comments in this project follow the voice rule documented in
 COMMENT_VOICE.md at the repo root. No exceptions, including for quick scripts
 or scratch files.
 
-## 7. Project state
+## 7. Teaching and explanation
+
+When the Builder-Auditor creates a new file or makes a significant change,
+it must append a brief explanation block at the end of its response (not
+inside the file itself) covering:
+
+- What each new fixture, function, or class does in plain language, one
+  sentence each
+- Why the structure was chosen — for example, why a fixture is
+  session-scoped rather than function-scoped, or why a particular locator
+  strategy was used over another
+- Where the code connects to the rest of the framework — for example,
+  "this page object inherits from BasePage in pages/base_page.py, which
+  provides the wait and navigation helpers"
+- Any pattern or concept a beginner might not recognize — for example,
+  what a context manager is, what yield does in a fixture, what
+  parametrize means
+
+This explanation is written at beginner coding level, in plain English,
+without assuming prior knowledge of pytest or Playwright internals. It is
+not a comment inside the code (comment voice rules still apply there) but
+a separate explanation in the agent's response, after the files are written.
+
+When working in Claude Chat rather than Claude Code, the same explanation
+standard applies whenever code is produced or modified — explain what was
+built and why, not just show the code.
+
+## 8. Project state
 
 Current page objects, test file coverage, reference vault contents, and useful
 commands are tracked in PROJECT_STATE.md, not in this file. Check there before
