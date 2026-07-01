@@ -13,6 +13,8 @@ jobs:
       BASE_URL: ${{ secrets.BASE_URL }}
       TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
       TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+      NOTES_EMAIL: ${{ secrets.NOTES_EMAIL }}
+      NOTES_PASSWORD: ${{ secrets.NOTES_PASSWORD }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
