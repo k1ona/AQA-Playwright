@@ -86,3 +86,18 @@ built and why, not just show the code.
 Current page objects, test file coverage, reference vault contents, and useful
 commands are tracked in PROJECT_STATE.md, not in this file. Check there before
 assuming a page object or test doesn't already exist.
+
+## 9. Playwright MCP
+
+The Playwright MCP server is connected and available in Claude Code sessions.
+It provides live browser access via the accessibility tree — not screenshots.
+
+The Planner must use it for every locator verification pass. browser_snapshot
+returns the real DOM structure; use it instead of the reference vault or any
+guessed selector. The reference vault HTML snapshots are for human offline
+inspection only, not for agent locator extraction.
+
+The Builder-Auditor may use it to verify a page state after a test runs, but
+must not use it as a substitute for actually executing the pytest suite.
+Playwright MCP browser sessions and pytest runs are different things — a page
+rendering correctly in the MCP browser does not mean the test passes.

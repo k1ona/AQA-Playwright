@@ -29,7 +29,7 @@
 
 ## Test suite summary (as of last CI run)
 
-- Total collected: 52 (local, includes DB test)
+- Total collected: 53 (local, includes DB test)
 - CI result: 49 passed, 1 skipped, 2 xfailed
 - Skipped: `test_db_bugs.py` — requires local practice app and Postgres, not available in CI
 - Xfailed: 2 tests in `test_geo.py` — known upstream `/get-city` endpoint degradation
@@ -37,6 +37,8 @@
 ## Reference vault
 
 - `reference_vault/expandtesting/` — saved HTML snapshots of practice.expandtesting.com pages, for offline selector inspection without hitting the live site.
+- `reference_vault/expandtesting/notes_app.html` — logged-in snapshot of the notes app (separate auth system from main sandbox), captured via `scripts/capture_notes_snapshot.py`.
+
 
 ## Useful commands
 
@@ -67,9 +69,10 @@
   Both are supported by pytest-playwright with no other changes needed.
   CI workflow already installs all browser dependencies via
   `playwright install --with-deps`.
+  ## Integrated tooling
 
-- Network interception/mocking: add tests using `page.route()` to intercept
-  and mock API responses from the browser — useful for testing edge cases
-  that are hard to trigger against a real server (empty lists, error states).
-  See Rahul Shetty course files test_Network1.py and test_Network2.py for
-  the pattern.
+- **Playwright MCP** (`@playwright/mcp@latest`) — connected in Claude Code
+  sessions, 23 tools. Gives the Planner agent live browser access via the
+  accessibility tree. Registered via `claude mcp add` scoped to this project
+  directory. The Planner uses `browser_snapshot` for locator verification
+  instead of reference vault snapshots.
