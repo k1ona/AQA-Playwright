@@ -10,9 +10,10 @@
 # was doing before this fixture existed.
 
 import os
-import requests
+
 import psycopg2
 import pytest
+import requests
 
 # This test depends on a local FastAPI app and Postgres container that only
 # exist on a developer machine, not in CI. Skipping here rather than trying

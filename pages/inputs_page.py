@@ -19,12 +19,12 @@ class InputsPage(BasePage):
 
         # 🖱️ STEP 2 — DECLARE ELEMENT LOCATORS
         # All IDs confirmed from DOM inspection of /inputs.
-        self.number_input    = page.locator("#input-number")
-        self.text_input      = page.locator("#input-text")
-        self.password_input  = page.locator("#input-password")
-        self.date_input      = page.locator("#input-date")
-        self.display_button  = page.locator("#btn-display-inputs")
-        self.clear_button    = page.locator("#btn-clear-inputs")
+        self.number_input = page.locator("#input-number")
+        self.text_input = page.locator("#input-text")
+        self.password_input = page.locator("#input-password")
+        self.date_input = page.locator("#input-date")
+        self.display_button = page.locator("#btn-display-inputs")
+        self.clear_button = page.locator("#btn-clear-inputs")
 
     def navigate(self):
         # 🌐 STEP 3 — NAVIGATE TO PAGE

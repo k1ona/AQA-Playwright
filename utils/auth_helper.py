@@ -1,5 +1,6 @@
 import os
-from playwright.sync_api import sync_playwright, Browser
+
+from playwright.sync_api import Browser, sync_playwright
 
 # ============================================================
 # 🔍 STEP 1 — DEFINE THE CANONICAL SESSION FILE PATH
@@ -123,4 +124,5 @@ def save_session_state(
 # ============================================================
 if __name__ == "__main__":
     from utils.config_manager import get_login_path
+
     save_session_state(get_login_path())

@@ -1,12 +1,13 @@
 import pytest
+
 from pages.checkboxes_page import CheckboxesPage
 from pages.dropdown_page import DropdownPage
 from pages.inputs_page import InputsPage
 
-
 # ╔══════════════════════════════════════════════════════════════╗
 # ║              CHECKBOXES TESTS                               ║
 # ╚══════════════════════════════════════════════════════════════╝
+
 
 @pytest.mark.smoke
 def test_checkbox1_default_state_is_unchecked(page):
@@ -35,9 +36,7 @@ def test_checkbox2_default_state_is_checked(page):
     checkboxes_page.navigate()
 
     # ✅ STEP 2 — Assert default state: checkbox 2 must be checked
-    assert checkboxes_page.is_checkbox2_checked(), (
-        "Expected checkbox 2 to be CHECKED on load, but it was unchecked."
-    )
+    assert checkboxes_page.is_checkbox2_checked(), "Expected checkbox 2 to be CHECKED on load, but it was unchecked."
 
 
 @pytest.mark.regression
@@ -53,15 +52,11 @@ def test_toggle_checkbox1_on_then_off(page):
 
     # ⚡ STEP 2 — First toggle: unchecked → checked
     checkboxes_page.toggle_checkbox1()
-    assert checkboxes_page.is_checkbox1_checked(), (
-        "After first click, checkbox 1 should be CHECKED."
-    )
+    assert checkboxes_page.is_checkbox1_checked(), "After first click, checkbox 1 should be CHECKED."
 
     # 🖱️ STEP 3 — Second toggle: checked → unchecked
     checkboxes_page.toggle_checkbox1()
-    assert not checkboxes_page.is_checkbox1_checked(), (
-        "After second click, checkbox 1 should be UNCHECKED again."
-    )
+    assert not checkboxes_page.is_checkbox1_checked(), "After second click, checkbox 1 should be UNCHECKED again."
 
 
 @pytest.mark.regression
@@ -76,14 +71,13 @@ def test_toggle_checkbox2_off(page):
 
     # ⚡ STEP 2 — Toggle: checked → unchecked
     checkboxes_page.toggle_checkbox2()
-    assert not checkboxes_page.is_checkbox2_checked(), (
-        "After clicking, checkbox 2 should be UNCHECKED."
-    )
+    assert not checkboxes_page.is_checkbox2_checked(), "After clicking, checkbox 2 should be UNCHECKED."
 
 
 # ╔══════════════════════════════════════════════════════════════╗
 # ║              DROPDOWN TESTS                                 ║
 # ╚══════════════════════════════════════════════════════════════╝
+
 
 @pytest.mark.smoke
 def test_simple_dropdown_select_option1(page):
@@ -99,9 +93,7 @@ def test_simple_dropdown_select_option1(page):
     dropdown_page.select_simple_option("1")
 
     # ✅ STEP 3 — Assert the live DOM value reflects the selection
-    assert dropdown_page.get_simple_dropdown_value() == "1", (
-        "Expected simple dropdown value to be '1' (Option 1)."
-    )
+    assert dropdown_page.get_simple_dropdown_value() == "1", "Expected simple dropdown value to be '1' (Option 1)."
 
 
 @pytest.mark.regression
@@ -117,9 +109,7 @@ def test_simple_dropdown_select_option2(page):
     dropdown_page.select_simple_option("2")
 
     # ✅ STEP 3 — Assert value
-    assert dropdown_page.get_simple_dropdown_value() == "2", (
-        "Expected simple dropdown value to be '2' (Option 2)."
-    )
+    assert dropdown_page.get_simple_dropdown_value() == "2", "Expected simple dropdown value to be '2' (Option 2)."
 
 
 @pytest.mark.regression
@@ -135,9 +125,7 @@ def test_per_page_dropdown_select_50(page):
     dropdown_page.select_per_page("50")
 
     # ✅ STEP 3 — Assert value
-    assert dropdown_page.get_per_page_value() == "50", (
-        "Expected per-page dropdown to show value '50'."
-    )
+    assert dropdown_page.get_per_page_value() == "50", "Expected per-page dropdown to show value '50'."
 
 
 @pytest.mark.regression
@@ -154,14 +142,13 @@ def test_country_dropdown_select_kazakhstan(page):
     dropdown_page.select_country("KZ")
 
     # ✅ STEP 3 — Assert value
-    assert dropdown_page.get_country_value() == "KZ", (
-        "Expected country dropdown to show value 'KZ' (Kazakhstan)."
-    )
+    assert dropdown_page.get_country_value() == "KZ", "Expected country dropdown to show value 'KZ' (Kazakhstan)."
 
 
 # ╔══════════════════════════════════════════════════════════════╗
 # ║              INPUTS TESTS                                   ║
 # ╚══════════════════════════════════════════════════════════════╝
+
 
 @pytest.mark.smoke
 def test_inputs_fill_number_field(page):
@@ -177,9 +164,7 @@ def test_inputs_fill_number_field(page):
     inputs_page.fill_number("42")
 
     # ✅ STEP 3 — Assert the DOM value matches what we typed
-    assert inputs_page.get_number_value() == "42", (
-        "Expected number input to contain '42' after fill."
-    )
+    assert inputs_page.get_number_value() == "42", "Expected number input to contain '42' after fill."
 
 
 @pytest.mark.smoke
@@ -195,9 +180,7 @@ def test_inputs_fill_text_field(page):
     inputs_page.fill_text("Hello Playwright")
 
     # ✅ STEP 3 — Assert
-    assert inputs_page.get_text_value() == "Hello Playwright", (
-        "Expected text input to contain 'Hello Playwright'."
-    )
+    assert inputs_page.get_text_value() == "Hello Playwright", "Expected text input to contain 'Hello Playwright'."
 
 
 @pytest.mark.regression
@@ -234,9 +217,7 @@ def test_inputs_fill_date_field(page):
     inputs_page.fill_date("2026-06-30")
 
     # ✅ STEP 3 — Assert
-    assert inputs_page.get_date_value() == "2026-06-30", (
-        "Expected date input to hold '2026-06-30'."
-    )
+    assert inputs_page.get_date_value() == "2026-06-30", "Expected date input to hold '2026-06-30'."
 
 
 @pytest.mark.regression
@@ -257,7 +238,7 @@ def test_inputs_clear_button_resets_all_fields(page):
     inputs_page.click_clear()
 
     # ✅ STEP 3 — Assert all fields are now empty
-    assert inputs_page.get_number_value()   == "", "Number field should be empty after clear."
-    assert inputs_page.get_text_value()     == "", "Text field should be empty after clear."
+    assert inputs_page.get_number_value() == "", "Number field should be empty after clear."
+    assert inputs_page.get_text_value() == "", "Text field should be empty after clear."
     assert inputs_page.get_password_value() == "", "Password field should be empty after clear."
-    assert inputs_page.get_date_value()     == "", "Date field should be empty after clear."
+    assert inputs_page.get_date_value() == "", "Date field should be empty after clear."
