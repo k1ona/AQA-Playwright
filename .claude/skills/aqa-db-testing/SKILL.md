@@ -1,4 +1,4 @@
-﻿---
+---
 name: aqa-db-testing
 description: >
   Use when writing or reviewing tests that assert PostgreSQL database state,

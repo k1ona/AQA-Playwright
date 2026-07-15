@@ -1,4 +1,4 @@
-﻿import pytest
+import pytest
 
 
 @pytest.mark.xfail(reason="live /get-city endpoint currently returns 500 for all coordinates, a known upstream degradation, not a test defect")

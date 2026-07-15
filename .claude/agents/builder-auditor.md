@@ -1,4 +1,4 @@
-﻿---
+---
 name: builder-auditor
 description: >
   Use after a Planner test plan exists. Writes the pytest test code following

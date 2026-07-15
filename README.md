@@ -1,4 +1,4 @@
-﻿# AQA-Playwright
+# AQA-Playwright
 
 ![tests](https://github.com/k1ona/AQA-Playwright/actions/workflows/tests.yml/badge.svg)
 

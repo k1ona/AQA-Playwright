@@ -1,4 +1,4 @@
-﻿---
+---
 name: aqa-bug-report
 description: >
   Use when writing a bug report from a failed test, a manual exploratory

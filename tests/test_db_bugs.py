@@ -1,4 +1,4 @@
-﻿# First real test for the aqa-db-testing skill. Creates a bug through the
+# First real test for the aqa-db-testing skill. Creates a bug through the
 # practice app's API, then asserts directly against Postgres rather than
 # trusting the API response, since the whole point of this skill is
 # verifying what actually landed in the database, not what the API claims.
