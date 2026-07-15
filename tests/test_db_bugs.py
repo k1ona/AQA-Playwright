@@ -39,7 +39,9 @@ def _delete_bug(bug_id):
         conn.close()
 
 
+@pytest.mark.integration
 def test_db_bugs_create_inserts_correct_row():
+    """Requires aqa-practice-app and Postgres running locally, see PROJECT_STATE.md."""
     response = requests.post(
         f"{PRACTICE_APP_URL}/bugs",
         json={"title": "test db assertion", "severity": "high"},
