@@ -1,0 +1,26 @@
+# Force LF line endings in the repo for all text files.
+# Git normalises on commit and checks out LF on every platform.
+* text=auto eol=lf
+
+# Explicit text overrides for common types
+*.py    text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.json  text eol=lf
+*.ini   text eol=lf
+*.cfg   text eol=lf
+*.toml  text eol=lf
+*.sh    text eol=lf
+
+# True binary — never touch line endings or encoding
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.whl   binary
+*.zip   binary
+*.gz    binary
+*.tar   binary
