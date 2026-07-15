@@ -46,6 +46,24 @@
 - Specific marker: `pytest -m smoke --headed`
 - UI component tests only: `pytest tests/test_ui_components.py --headed`
 
+## Integration tests
+
+`tests/test_db_bugs.py::test_db_bugs_create_inserts_correct_row` is marked
+`@pytest.mark.integration` and excluded from the default local run (pytest.ini
+sets `-m "not integration"`) and from CI (skipped via its own
+`GITHUB_ACTIONS` check). It requires local infrastructure that only exists on
+a developer machine:
+
+- **aqa-practice-app** running locally: `uvicorn main:app --port 8000`
+- **Postgres** running locally with `schema.sql` applied, reachable via the
+  `TEST_DATABASE_URL` environment variable
+
+To run it explicitly:
+
+```
+pytest -m integration -v
+```
+
 ## Known gotchas
 
 - BASE_URL must be `https://practice.expandtesting.com`, not

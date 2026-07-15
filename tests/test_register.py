@@ -72,11 +72,14 @@ def test_register_username_too_short_shows_length_error(page):
 
 
 @pytest.mark.regression
-@pytest.mark.parametrize("bad_username", [
-    "test_user",   # underscore not allowed
-    "-testuser",   # leading hyphen not allowed
-    "a" * 40,      # exceeds 39-character maximum
-])
+@pytest.mark.parametrize(
+    "bad_username",
+    [
+        "test_user",  # underscore not allowed
+        "-testuser",  # leading hyphen not allowed
+        "a" * 40,  # exceeds 39-character maximum
+    ],
+)
 def test_register_invalid_username_format_shows_format_error(page, bad_username):
     # Uppercase letters produce a different generic server error ("An error occurred
     # during registration") rather than this format message — that inconsistency is

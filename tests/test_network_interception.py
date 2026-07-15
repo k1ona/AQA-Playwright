@@ -1,7 +1,7 @@
-import pytest
 import os
-from playwright.sync_api import Page, expect
 
+import pytest
+from playwright.sync_api import Page, expect
 
 # The mock payload mirrors the exact shape the real notes API returns for
 # an empty notes list, confirmed by hitting the live endpoint directly
@@ -57,6 +57,4 @@ def test_notes_empty_state_shown_when_api_returns_no_notes(logged_in_notes_page:
     # controls what the UI renders, not whatever was already on screen.
     logged_in_notes_page.reload()
 
-    expect(logged_in_notes_page.get_by_text(
-        "You don't have any notes in all categories"
-    )).to_be_visible()
+    expect(logged_in_notes_page.get_by_text("You don't have any notes in all categories")).to_be_visible()

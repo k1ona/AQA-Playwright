@@ -1,6 +1,7 @@
 import pytest
+
 from pages.login_page import LoginPage
-from utils.config_manager import get_secure_path, get_test_username, get_test_password
+from utils.config_manager import get_secure_path, get_test_password, get_test_username
 
 
 @pytest.mark.smoke
@@ -50,12 +51,8 @@ def test_session_state_bypass(authenticated_page):
     # page.content() reads the full HTML without waiting for visual rendering,
     # which is safer than locator.wait_for() after domcontentloaded.
     page_html = authenticated_page.content()
-    assert "Secure Area" in page_html, (
-        "Secure Area content not found in page HTML — session state may have expired."
-    )
+    assert "Secure Area" in page_html, "Secure Area content not found in page HTML — session state may have expired."
 
     # 🔒 STEP 4 — Confirm the logout link exists (only rendered when authenticated)
     logout_link = authenticated_page.locator("a[href='/logout']")
-    assert logout_link.count() > 0, (
-        "Logout link not found — page did not load in an authenticated state."
-    )
+    assert logout_link.count() > 0, "Logout link not found — page did not load in an authenticated state."

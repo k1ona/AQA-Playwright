@@ -1,4 +1,4 @@
-﻿---
+---
 name: planner
 description: >
   Use before writing any new test. Reads the requirement, page, or endpoint

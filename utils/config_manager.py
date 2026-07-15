@@ -22,6 +22,7 @@ _ENV_FILE = _ROOT_DIR / ".env"
 # ============================================================
 try:
     from dotenv import load_dotenv
+
     if _ENV_FILE.exists():
         load_dotenv(dotenv_path=_ENV_FILE, override=False)
         print(f"[CONFIG] ✅ Loaded environment variables from: {_ENV_FILE}")

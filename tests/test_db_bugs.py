@@ -1,4 +1,4 @@
-﻿# First real test for the aqa-db-testing skill. Creates a bug through the
+# First real test for the aqa-db-testing skill. Creates a bug through the
 # practice app's API, then asserts directly against Postgres rather than
 # trusting the API response, since the whole point of this skill is
 # verifying what actually landed in the database, not what the API claims.
@@ -10,9 +10,10 @@
 # was doing before this fixture existed.
 
 import os
-import requests
+
 import psycopg2
 import pytest
+import requests
 
 # This test depends on a local FastAPI app and Postgres container that only
 # exist on a developer machine, not in CI. Skipping here rather than trying
@@ -38,7 +39,9 @@ def _delete_bug(bug_id):
         conn.close()
 
 
+@pytest.mark.integration
 def test_db_bugs_create_inserts_correct_row():
+    """Requires aqa-practice-app and Postgres running locally, see PROJECT_STATE.md."""
     response = requests.post(
         f"{PRACTICE_APP_URL}/bugs",
         json={"title": "test db assertion", "severity": "high"},

@@ -1,4 +1,4 @@
-﻿.env
+.env
 __pycache__/
 *.pyc
 .pytest_cache/
@@ -8,3 +8,4 @@ test-results/
 reports/
 reference_vault/naveen_intel/
 test-results/
+.claude/settings.local.json

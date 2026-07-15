@@ -1,0 +1,43 @@
+[project]
+name = "aqa-playwright"
+version = "0.1.0"
+description = "Playwright-based AQA test suite for practice.expandtesting.com"
+requires-python = ">=3.12"
+# No runtime package — this is a test-only project.
+# All dependencies live in the dev group below.
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "allure-pytest>=2.16.0",
+    "Faker>=40.0.0",
+    "mypy>=1.0",
+    "playwright>=1.61.0",
+    "psycopg2-binary>=2.9.0",
+    "pytest>=9.1.0",
+    "pytest-base-url>=2.1.0",
+    "pytest-html>=4.2.0",
+    "pytest-playwright>=0.8.0",
+    "pytest-xdist>=3.8.0",
+    "python-dotenv>=1.2.0",
+    "requests>=2.34.0",
+    "ruff>=0.15.0",
+    "types-requests>=2.31.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+# E/F = pycodestyle errors + pyflakes; I = import order
+select = ["E", "F", "I"]
+# Allow assert in tests; silence star-import warnings in conftest stubs
+per-file-ignores = { "tests/**/*.py" = ["F811"], "tests/conftest.py" = ["F401"] }
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+# Avoids "Duplicate module named conftest" when tests/ and tests/api/ both have a conftest.py
+explicit_package_bases = true
+# Non-strict mode: unannotated functions are allowed, no --strict flags

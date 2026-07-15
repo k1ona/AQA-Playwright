@@ -1,4 +1,4 @@
-﻿name: tests
+name: tests
 
 on:
   push:
@@ -7,6 +7,24 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install uv
+        run: pip install uv
+      - name: Install dev dependencies
+        run: uv sync --group dev
+      - name: ruff lint
+        run: uv run ruff check .
+      - name: ruff format check
+        run: uv run ruff format --check .
+      - name: mypy
+        run: uv run mypy .
+
   test:
     runs-on: ubuntu-latest
     env:
@@ -21,11 +39,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install uv
+        run: pip install uv
+
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          playwright install --with-deps
+          uv sync --group dev
+          uv run playwright install --with-deps
 
       - name: Download Allure history from previous run
         uses: actions/download-artifact@v4
@@ -35,7 +55,12 @@ jobs:
         continue-on-error: true
 
       - name: Run tests
-        run: pytest --alluredir=reports/allure-results --maxfail=1 --disable-warnings -q
+        # -n auto: distribute tests across available CPU cores via pytest-xdist.
+        # Each worker writes its own UUID-named result files to --alluredir, so
+        # there is no write collision and Allure history merging is unaffected —
+        # that happens in the "Generate Allure report" step below, after all
+        # workers have finished.
+        run: uv run pytest --alluredir=reports/allure-results -n auto --disable-warnings -q
 
       - name: Generate Allure report
         if: always()

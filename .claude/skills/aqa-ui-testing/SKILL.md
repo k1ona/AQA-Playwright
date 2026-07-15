@@ -1,4 +1,4 @@
-﻿---
+---
 name: aqa-ui-testing
 description: >
   Use when writing or reviewing Playwright UI/E2E tests for this project,

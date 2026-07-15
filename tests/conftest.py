@@ -1,12 +1,13 @@
 import os
-import pytest
 import pathlib
+
+import pytest
 
 from utils.auth_helper import SESSION_FILE_PATH, capture_session_automatically
 from utils.config_manager import (
-    get_test_username,
-    get_test_password,
     get_login_path,
+    get_test_password,
+    get_test_username,
 )
 
 # ============================================================
@@ -49,6 +50,7 @@ def allure_environment(tmp_path_factory):
         f"Suite=AQA-Playwright\n",
         encoding="utf-8",
     )
+
 
 @pytest.fixture(scope="session")
 def authenticated_page(playwright, browser_type_launch_args):

@@ -2,9 +2,10 @@
 # One-off utility to save a logged-in snapshot of the notes app for offline
 # locator inspection. Not part of the test suite — run manually when needed.
 
+import os
+
 from dotenv import load_dotenv
 from playwright.sync_api import sync_playwright
-import os
 
 load_dotenv()
 

@@ -1,4 +1,4 @@
-﻿---
+---
 name: aqa-api-testing
 description: >
   Use when writing or reviewing API tests, REST endpoints, status codes,

@@ -1,4 +1,4 @@
-﻿# Comment Voice
+# Comment Voice
 
 Comments explain *why*, not *what*. Assume the reader can already read Python.
 A comment earns its place by adding judgment, context, or a caveat the code

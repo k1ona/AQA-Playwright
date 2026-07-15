@@ -1,7 +1,6 @@
-﻿import pytest
+import pytest
 
 
-@pytest.mark.xfail(reason="live /get-city endpoint currently returns 500 for all coordinates, a known upstream degradation, not a test defect")
 @pytest.mark.smoke
 def test_get_city_valid_coordinates_returns_city_name(api_session, api_base_url):
     response = api_session.get(f"{api_base_url}/get-city", params={"lat": 48.8566, "lon": 2.3522})
@@ -19,7 +18,6 @@ def test_get_city_missing_params_returns_400(api_session, api_base_url):
     assert body["message"] == "Missing coordinates"
 
 
-@pytest.mark.xfail(reason="live /get-city endpoint currently returns 500 for all coordinates, a known upstream degradation, not a test defect")
 @pytest.mark.regression
 def test_get_city_ocean_coordinates_returns_404(api_session, api_base_url):
     response = api_session.get(f"{api_base_url}/get-city", params={"lat": 0, "lon": 0})

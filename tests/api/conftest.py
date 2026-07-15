@@ -1,4 +1,4 @@
-﻿import pytest
+import pytest
 import requests
 
 from utils.config_manager import get_base_url
